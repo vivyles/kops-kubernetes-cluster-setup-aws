@@ -1,7 +1,4 @@
-# kops-kubernetes-cluster-configuration
-# Landmark Technologies,  -    Landmark Technologies 
-# Tel: +1 437 215 2483,   -     +1 437 215 2483 
-# mylandmarktech@gaIL.com,  -    www.mylandmarktech.com 
+
 
 # Setting up Kubernetes (K8s) Cluster on AWS Using KOPS
 
@@ -21,6 +18,19 @@
 
 #!/bin/bash
 # 1) Create Ubuntu EC2 instance in AWS
+
+#Install jenkins
+
+sudo apt update -y
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key |sudo gpg --dearmor -o /usr/share/keyrings/jenkins.gpg
+sudo sh -c 'echo deb [signed-by=/usr/share/keyrings/jenkins.gpg] http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt update -y
+sudo apt install jenkins
+
+#Add jenkins user to docker group
+
+sudo usermod -aG docker jenkins
+sudo echo "jenkins ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/jenkins
 
 # 2a) create kops user
 `` sh
